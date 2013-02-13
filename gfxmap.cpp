@@ -4,13 +4,13 @@ GFXMap::GFXMap(SDL_Surface *screen)
 {
     Screen = screen;
     Picture = NULL;
+
+    for(int i=0;i<MAX_ANIMATIONEN;i++) Animationen[i] = NULL;
 }
 
 GFXMap::~GFXMap()
 {
     if(Picture != NULL) SDL_FreeSurface(Picture);
-
-    for(int i=0;i<MAX_ANIMATIONEN;i++) Animationen[i] = NULL;
 }
 
 int GFXMap::LoadTileSet(const char *filename, int raster_x, int raster_y)
