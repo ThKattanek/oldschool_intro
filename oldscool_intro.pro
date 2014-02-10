@@ -8,7 +8,7 @@ TARGET = start
 LIBS += -lSDL -lSDL_gfx -lSDL_image -lSDL_mixer
 }
 
-linux-g++-64{
+linux-g++{
 TARGET = start
 DESTDIR = "bin/linux_x86_64"
 LIBS += -lSDL -lSDL_gfx -lSDL_image -lSDL_mixer
