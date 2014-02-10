@@ -24,7 +24,7 @@ int main(int , char** )
     int err;
 
     /// Initialisieren der GameEngine incl. Loop ///
-    ge = new GameEngine(esc_ende|resize,640,480,32,(char*)"INTRO BY THORSTEN KATTANEK ALIAS MR.EMU64 --- (C)2012",&err);
+    ge = new GameEngine(esc_ende|resize|fullscreen,640,480,32,(char*)"INTRO BY THORSTEN KATTANEK ALIAS MR.EMU64 --- (C)2012",&err);
     if(err < 0) return 0;
 
     /// Demo Installieren ///
@@ -35,6 +35,8 @@ int main(int , char** )
 
     /// CallBacks setzen ///
     ge->RenderCallback = bind(Render,_1,_2);
+
+    SDL_ShowCursor(false);
 
     /// ************************void DrawScrollzeile(void)*************** ///
 
