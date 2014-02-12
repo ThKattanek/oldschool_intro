@@ -3,14 +3,14 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 linux-g++-32{
-DESTDIR = "bin/linux_i686"
+DESTDIR = "bin/linux_32bit"
 TARGET = start
 LIBS += -lSDL -lSDL_gfx -lSDL_image -lSDL_mixer
 }
 
-linux-g++{
+linux-g++-64{
 TARGET = start
-DESTDIR = "bin/linux_x86_64"
+DESTDIR = "bin/linux_64bit"
 LIBS += -lSDL -lSDL_gfx -lSDL_image -lSDL_mixer
 }
 
@@ -61,7 +61,9 @@ OTHER_FILES += \
     daten/font1m.inf \
     daten/font1.png \
     daten/font1.inf \
-    daten/3.xm
+    daten/3.xm \
+    build_linux32.sh \
+    build_linux64.sh
 
 
 
