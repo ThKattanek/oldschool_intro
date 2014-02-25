@@ -6,14 +6,25 @@ GameEngine::GameEngine(int sf,int breite,int hoehe,int bits,char *titel,int *err
 
     int ret;
 
-    ret = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+    ret = SDL_Init(SDL_INIT_VIDEO);
     if(ret < 0)
     {
-        cout << "ERROR" << endl << "> Beim installieren von SDL: " << SDL_GetError() << endl;
+        cout << "ERROR" << endl << "> Beim installieren von SDL_VIDEO: " << SDL_GetError() << endl;
         if(ret != 0) *err = -1;
         ende = true;
         return;
     }
+
+    if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
+     {
+        cout << "ERROR" << endl << "> Beim installieren von SDL_AUDIO: " << SDL_GetError() << endl;
+        cout << "SDL_FEHLERMELDUNG: " << SDL_GetError() << endl;
+        if(ret != 0) *err = -1;
+        ende = true;
+
+
+       return;
+     }
 
     xw = breite;
     yw = hoehe;
@@ -62,6 +73,8 @@ GameEngine::GameEngine(int sf,int breite,int hoehe,int bits,char *titel,int *err
 
     SDL_WM_SetCaption(titel,0);
 
+
+
     ticks_new = SDL_GetTicks();
     ticks_old = ticks_new;
 
@@ -76,7 +89,36 @@ GameEngine::GameEngine(int sf,int breite,int hoehe,int bits,char *titel,int *err
     for(int i=0;i<AUDIO_MUSIK_SLOTS;i++)musik[i]=0;
 
     //Mix_OpenAudio(AUDIO_SAMPLERATE,AUDIO_FOTMAT,AUDIO_CHANNELS,AUDIO_BUFFERSIZE);
-    Mix_OpenAudio(44100,AUDIO_S16,2,4096);
+    //Mix_OpenAudio(44100,AUDIO_S16,2,4096);
+
+
+#ifdef HAVE_MIX_INIT
+ int initted;
+
+ printf("About to call Mix_Init():\n");
+
+ initted = Mix_Init(MIX_INIT_OGG);
+
+ /* We must have Ogg support to have sound: */
+ if((initted & MIX_INIT_OGG) != MIX_INIT_OGG)
+ {
+   printf("Mix_Init: Failed to init required ogg support!\n");
+   printf("Mix_Init: %s\n", Mix_GetError());
+   exit(2);
+ }
+
+ printf("Mix_Init() succeeded.\n");
+
+#else
+ printf("Mix_Init() not detected by configure script.\n");
+#endif
+
+    cout << "Alles OK...";
+
+    if(Mix_OpenAudio(44100, AUDIO_S16, 2, 4096)) {
+        cout << "Unable to open audio!" << endl;
+        return;
+      }
 
     /// CallBack auf 0 setzen !!! ///
     RenderCallback = 0;
