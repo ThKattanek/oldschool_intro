@@ -62,8 +62,6 @@ OTHER_FILES += \
     daten/font1.png \
     daten/font1.inf \
     daten/3.xm \
-    build_linux32.sh \
-    build_linux64.sh \
     build_win32.sh \
     build_win64.sh
 
