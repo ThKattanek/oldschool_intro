@@ -14,15 +14,9 @@ DESTDIR = "bin/linux_64bit"
 LIBS += -lSDL -lSDL_gfx -lSDL_image -lSDL_mixer
 }
 
-win32-g++-cross{
+win32-g++{
 TARGET = start
 DESTDIR = "bin/win_x32"
-LIBS += -lmingw32 -lSDLmain -lSDL -lSDL_gfx -lSDL_image -lSDL_mixer
-}
-
-win64-g++-cross{
-TARGET = start
-DESTDIR = "bin/win_x64"
 LIBS += -lmingw32 -lSDLmain -lSDL -lSDL_gfx -lSDL_image -lSDL_mixer
 }
 
