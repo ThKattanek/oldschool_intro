@@ -20,9 +20,6 @@ target_link_libraries(oldscool_intro SDL SDL_gfx SDL_image SDL_mixer)
 endif(UNIX)
 
 if(WIN32)
-
-message(Dies ist ein TEst ... ${CMAKE_SDL_LIBRARIES})
-
 target_link_libraries(oldscool_intro ${CMAKE_SDL_LIBRARIES})
 endif(WIN32)
 

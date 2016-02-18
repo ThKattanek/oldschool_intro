@@ -36,4 +36,4 @@ cmake -DCMAKE_BUILD_TYPE=Release\
       -DCMAKE_SDL_LIBRARIES="`i686-w64-mingw32.static-sdl-config --libs` `i686-w64-mingw32.static-pkg-config SDL_image SDL_mixer SDL_gfx --libs`"\
       ..
 # build run
-make
+make -j8

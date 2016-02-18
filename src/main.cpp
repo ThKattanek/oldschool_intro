@@ -36,7 +36,7 @@ int main(int , char** )
     /// CallBacks setzen ///
     ge->RenderCallback = bind(Render,_1,_2);
 
-    SDL_ShowCursor(false);
+    SDL_ShowCursor(true);
 
     /// ************************void DrawScrollzeile(void)*************** ///
 
