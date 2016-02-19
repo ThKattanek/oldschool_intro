@@ -25,7 +25,7 @@ nano cross_build_mxe.sh
 - SDL_gfx
 - SDL_mixer
 
-#this must in the daten directory
+#This must in the daten directory
 - 3.xm
 - font1.png
 - font1m.png
