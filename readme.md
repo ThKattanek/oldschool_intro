@@ -8,7 +8,7 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 make -j4
 ```
 
-#Cross Build Windows Binary with MXE (mxe.cc)#
+#Compile for Windows on Limux with MXE (mxe.cc)#
 ```Bash  
 git clone https://tkattanek@bitbucket.org/tkattanek/oldscool_intro.git
 cd oldscool_intro
