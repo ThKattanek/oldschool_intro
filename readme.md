@@ -9,6 +9,7 @@ make -j4
 ```
 
 #Compile for Windows on Limux with MXE (mxe.cc)#
+MXE evoriment must installed on your system
 ```Bash  
 git clone https://tkattanek@bitbucket.org/tkattanek/oldscool_intro.git
 cd oldscool_intro
