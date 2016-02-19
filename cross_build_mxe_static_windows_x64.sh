@@ -8,7 +8,7 @@ MXE_ROOT_PATH=/media/daten/mxe
 
 ###############################################################################
 
-BUILD_PATH="./windows_build"
+BUILD_PATH="./windows_x64_build"
 MXE_USR_PATH="$MXE_ROOT_PATH/usr"
 MXE_BIN_PATH="$MXE_USR_PATH/bin"
 
@@ -32,8 +32,8 @@ cd "$BUILD_PATH"
 
 # cmake run
 cmake -DCMAKE_BUILD_TYPE=Release\
-      -DCMAKE_TOOLCHAIN_FILE="$MXE_USR_PATH/i686-w64-mingw32.static/share/cmake/mxe-conf.cmake"\
-      -DCMAKE_SDL_LIBRARIES="`i686-w64-mingw32.static-sdl-config --libs` `i686-w64-mingw32.static-pkg-config SDL_image SDL_mixer SDL_gfx --libs`"\
+      -DCMAKE_TOOLCHAIN_FILE="$MXE_USR_PATH/x86_64-w64-mingw32.static/share/cmake/mxe-conf.cmake"\
+      -DCMAKE_SDL_LIBRARIES="`x86_64-w64-mingw32.static-sdl-config --libs` `x86_64-w64-mingw32.static-pkg-config SDL_image SDL_mixer SDL_gfx --libs`"\
       ..
 # build run
 make -j8
