@@ -26,11 +26,11 @@ nano cross_build_mxe.sh
 - SDL_mixer
 
 #this must in the daten directory
--3.xm
--font1.png
--font1m.png
--font6.png
--giana.png
+- 3.xm
+- font1.png
+- font1m.png
+- font6.png
+- giana.png
 
 
 #screenshot
