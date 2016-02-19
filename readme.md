@@ -24,9 +24,13 @@ nano cross_build_mxe.sh
 - SLD_image
 - SDL_gfx
 - SDL_mixer
-#Was gehört mit zur Ausführbaren Datei in den Ordner
-1. Ein Verzeichnis "daten"
-2. Dort muss hinnein 3.xm / font1.png / font1m.png / font6.png / giana.png
+
+#this must in the daten directory
+-3.xm
+-font1.png
+-font1m.png
+-font6.png
+-giana.png
 
 
 #screenshot
