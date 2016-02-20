@@ -3,8 +3,8 @@
 
 #define MAX_ANIMATIONEN 256
 
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #include <iostream>
 using namespace std;

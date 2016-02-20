@@ -1,9 +1,9 @@
 #include "starfield.h"
 #include <stdlib.h>
 
-Starfield::Starfield(SDL_Surface *screen)
+Starfield::Starfield(SDL_Renderer *renderer)
 {
-    Screen = screen;
+    this->renderer = renderer;
 
     StarAnzahl = 0;
     StarBuffer = NULL;
@@ -47,8 +47,9 @@ void Starfield::DrawStars(float frame_time,int x, int y)
     if(StarBuffer == NULL) return;
 
     for(int i=0;i<StarAnzahl;i++)
-    {
-        pixelColor(Screen,StarBuffer[i]->pos_x+x,StarBuffer[i]->pos_y+y,StarColor);
+    {        
+        SDL_SetRenderDrawColor(renderer,StarColor >> 24,StarColor >> 16, StarColor >> 8, StarColor);
+        SDL_RenderDrawPoint(renderer,StarBuffer[i]->pos_x+x,StarBuffer[i]->pos_y+y);
 
         StarBuffer[i]->pos_x += frame_time*XSpeed;
         if(StarBuffer[i]->pos_x >= XW) StarBuffer[i]->pos_x -= XW;

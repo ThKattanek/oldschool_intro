@@ -4,10 +4,8 @@
 #include <iostream>
 using namespace std;
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_gfxPrimitives.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "tr1/functional"
 using namespace std::tr1;
@@ -43,7 +41,7 @@ public:
     void ExitLoop(void);
     bool Loop();
     void ViewFPS(bool status);
-    SDL_Surface* GetScreen(void);
+    SDL_Surface *GetScreen(void);
     void NewObject(HColorScroll **obj);
     void NewObject(GFXMap **obj);
     void NewObject(BitmapFont **obj);
@@ -66,8 +64,11 @@ private:
     SDL_Event event;
     int xw,yw,colbits;
     bool isResizeEnable;
+    SDL_Window *main_window;
     SDL_Surface *screen0;
     SDL_Surface *screen1;
+    SDL_Renderer *renderer;
+
     int ticks_old,ticks_new;
     float frame_time;
 

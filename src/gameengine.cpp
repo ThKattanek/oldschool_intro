@@ -22,7 +22,6 @@ GameEngine::GameEngine(int sf,int breite,int hoehe,int bits,char *titel,int *err
         if(ret != 0) *err = -1;
         ende = true;
 
-
        return;
      }
 
@@ -35,14 +34,22 @@ GameEngine::GameEngine(int sf,int breite,int hoehe,int bits,char *titel,int *err
     if((sf & resize) == resize)
     {
         isResizeEnable = true;
-        svm_flags |= SDL_RESIZABLE;
+        svm_flags |= SDL_WINDOW_RESIZABLE;
     }
     else isResizeEnable = false;
 
-    if((sf & fullscreen) == fullscreen) svm_flags |= SDL_FULLSCREEN;
+    if((sf & fullscreen) == fullscreen) svm_flags |= SDL_WINDOW_FULLSCREEN;
     if((sf & esc_ende) == esc_ende) EnabledESC_Ende = true; else EnabledESC_Ende = false;
 
-    screen0 = SDL_SetVideoMode(xw,yw,colbits,svm_flags | SDL_HWSURFACE | SDL_DOUBLEBUF);
+    svm_flags |= SDL_WINDOW_OPENGL;
+    main_window = SDL_CreateWindow(titel,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,xw, yw,svm_flags);
+    renderer = SDL_CreateRenderer(main_window, -1, SDL_RENDERER_SOFTWARE);
+    screen0 = SDL_GetWindowSurface(main_window);
+
+    SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+    SDL_RenderSetLogicalSize(renderer, xw, yw);
+
     if(screen0 == 0)
     {
         cout << "Es konnte kein Fenster geoeffnet werden: " << SDL_GetError() << endl;
@@ -57,7 +64,7 @@ GameEngine::GameEngine(int sf,int breite,int hoehe,int bits,char *titel,int *err
 
     if(isResizeEnable)
     {
-        screen1 = SDL_CreateRGBSurface(SDL_HWSURFACE,xw,yw,colbits,0,0,0,0);
+        screen1 = SDL_CreateRGBSurface(0,xw,yw,colbits,0,0,0,0);
         if(screen1 == 0)
         {
             cout << "Es konnte kein Surface1 erstellt werden: " << SDL_GetError() << endl;
@@ -70,10 +77,6 @@ GameEngine::GameEngine(int sf,int breite,int hoehe,int bits,char *titel,int *err
         screen1_rec.w = xw;
         screen1_rec.h = yw;
     }
-
-    SDL_WM_SetCaption(titel,0);
-
-
 
     ticks_new = SDL_GetTicks();
     ticks_old = ticks_new;
@@ -88,21 +91,26 @@ GameEngine::GameEngine(int sf,int breite,int hoehe,int bits,char *titel,int *err
     /// Audio setzen ///
     for(int i=0;i<AUDIO_MUSIK_SLOTS;i++)musik[i]=0;
 
-    //Mix_OpenAudio(AUDIO_SAMPLERATE,AUDIO_FOTMAT,AUDIO_CHANNELS,AUDIO_BUFFERSIZE);
-    //Mix_OpenAudio(44100,AUDIO_S16,2,4096);
+    if(Mix_OpenAudio(AUDIO_SAMPLERATE,MIX_DEFAULT_FORMAT,AUDIO_CHANNELS,AUDIO_BUFFERSIZE) == -1)
+    {
+        printf("Mix_Init: Failed to init required mod support!\n");
+        printf("Mix_Init: %s\n", Mix_GetError());
+        exit(2);
+    }
+    Mix_Init(MIX_INIT_MOD);
 
-
+/*
 #ifdef HAVE_MIX_INIT
  int initted;
 
  printf("About to call Mix_Init():\n");
 
- initted = Mix_Init(MIX_INIT_OGG);
+ initted = Mix_Init(MIX_INIT_MOD);
 
- /* We must have Ogg support to have sound: */
- if((initted & MIX_INIT_OGG) != MIX_INIT_OGG)
+ // We must have MOD support to have sound:
+ if((initted & MIX_INIT_MOD) != MIX_INIT_MOD)
  {
-   printf("Mix_Init: Failed to init required ogg support!\n");
+   printf("Mix_Init: Failed to init required mod support!\n");
    printf("Mix_Init: %s\n", Mix_GetError());
    exit(2);
  }
@@ -110,16 +118,22 @@ GameEngine::GameEngine(int sf,int breite,int hoehe,int bits,char *titel,int *err
  printf("Mix_Init() succeeded.\n");
 
 #else
- printf("Mix_Init() not detected by configure script.\n");
+printf("Mix_Init() not detected by configure script.\n");
+
+
 #endif
 
     cout << "Alles OK...";
 
-    if(Mix_OpenAudio(44100, AUDIO_S16, 2, 4096)) {
+
+    if(Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 4096))
+    //if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096))
+    //if(Mix_OpenAudio(44100, AUDIO_S16, 2, 4096))
+    {
         cout << "Unable to open audio!" << endl;
         return;
       }
-
+*/
     /// CallBack auf 0 setzen !!! ///
     RenderCallback = 0;
 
@@ -171,10 +185,10 @@ bool GameEngine::Loop()
         case SDL_QUIT:
             ende = true;
             break;
-        case SDL_VIDEORESIZE:
-            xw = screen0_rec.w = event.resize.w;
-            yw = screen0_rec.h = event.resize.h;
-            screen0 = SDL_SetVideoMode(xw,yw,colbits,svm_flags | SDL_HWSURFACE | SDL_DOUBLEBUF);
+        case SDL_WINDOWEVENT_RESIZED:
+            xw = screen0_rec.w = event.window.data1;
+            yw = screen0_rec.h = event.window.data2;
+            //screen0 = SDL_SetVideoMode(xw,yw,colbits,svm_flags | SDL_HWSURFACE | SDL_DOUBLEBUF);
             break;
         case SDL_KEYDOWN:
             switch(event.key.keysym.sym)
@@ -202,11 +216,12 @@ bool GameEngine::Loop()
     {
         char fps_out[20];
         sprintf(fps_out,"FPS: %d",fps);
-        stringRGBA(screen0,2,2,fps_out,255,255,255,100);
+        stringRGBA(renderer,2,2,fps_out,255,255,255,100);
     }
 
-    SDL_Flip(screen0);
+    SDL_RenderPresent(renderer);
     //SDL_Delay(1);
+
     return ende;
 }
 
@@ -245,8 +260,8 @@ void GameEngine::NewObject(BitmapFont **obj)
 void GameEngine::NewObject(Starfield **obj)
 {
     *obj = 0;
-    if(isResizeEnable) *obj = new Starfield(screen1);
-    else *obj = new Starfield(screen0);
+    if(isResizeEnable) *obj = new Starfield(renderer);
+    else *obj = new Starfield(renderer);
 }
 
 void GameEngine::NewObject(SinusScroller **obj)
@@ -263,15 +278,16 @@ void GameEngine::DrawRect(int x, int y, int xw, int yw, Uint32 color)
     if(isResizeEnable) AktScreen = screen1;
     else AktScreen = screen0;
 
-    //SDL_Rect rec = {x,y,xw,yw};
-    boxColor(AktScreen,x,y,xw+x,yw+y,color);
-    //SDL_FillRect(AktScreen,&rec,color);
+    SDL_Rect rec = {x,y,xw,yw+1};
+    SDL_SetRenderDrawColor(renderer,color >> 24,color >> 16, color >> 8, color);
+    SDL_RenderFillRect(renderer, &rec);
 }
 
 void GameEngine::RenderVideo(SDL_Surface *screen)
 {
     if(ende) return;
-    SDL_FillRect(screen,0,0);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
     if(RenderCallback != 0) RenderCallback(this,frame_time);
 }
 

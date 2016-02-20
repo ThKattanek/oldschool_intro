@@ -1,5 +1,5 @@
-#include "SDL/SDL.h"
-#include "SDL/SDL_gfxPrimitives.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
 
 class Star
 {
@@ -17,13 +17,13 @@ class Star
 class Starfield
 {
     public:
-    Starfield(SDL_Surface *screen);
+    Starfield(SDL_Renderer *renderer);
     ~Starfield();
     void SetStars(int star_anzahl, int xw, int yw, Uint32 color, float xspeed, float yspeed);
     void DrawStars(float frame_time,int x, int y);
 
     private:
-    SDL_Surface *Screen;
+    SDL_Renderer *renderer;
     Uint16 StarAnzahl;
     Uint32 StarColor;
     Star **StarBuffer;

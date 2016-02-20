@@ -26,8 +26,8 @@ void SinusScroller::InitScroller(BitmapFont *bmpfont, int xchar_anzahl, int yw, 
     YW = yw;
     CharXW = Font->GetCharXW();
 
-    ScreenTmp = SDL_CreateRGBSurface(SDL_HWSURFACE,XW-CharXW,YW,32,0,0,0,0);
-    SDL_SetColorKey(ScreenTmp,SDL_SRCCOLORKEY,0);
+    ScreenTmp = SDL_CreateRGBSurface(0,XW-CharXW,YW,32,0,0,0,0);
+    SDL_SetColorKey(ScreenTmp,SDL_TRUE,0);
     ScrollZeile = new char[XCharAnzahl];
     for(int i=0;i<XCharAnzahl;i++) ScrollZeile[i] = 0x20;
 

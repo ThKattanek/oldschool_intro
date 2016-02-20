@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
-
 project(oldscool_intro)
+
+# set( CMAKE_VERBOSE_MAKEFILE ON)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -s -Os")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s -Os")
 
 set(SOURCE src/main.cpp
     src/bitmapfont.cpp src/bitmapfont.h
@@ -16,11 +18,11 @@ set(SOURCE src/main.cpp
 add_executable(oldscool_intro ${SOURCE})
 
 if(UNIX)
-target_link_libraries(oldscool_intro SDL SDL_gfx SDL_image SDL_mixer)
+target_link_libraries(oldscool_intro SDL2 SDL2_gfx SDL2_image SDL2_mixer)
 endif(UNIX)
 
 if(WIN32)
-target_link_libraries(oldscool_intro ${CMAKE_SDL_LIBRARIES})
+target_link_libraries(oldscool_intro ${CMAKE_SDL2_LIBS})
 endif(WIN32)
 
 

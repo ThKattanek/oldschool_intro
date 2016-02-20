@@ -23,8 +23,10 @@ int main(int , char** )
     GameEngine *ge;
     int err;
 
+    cout << "Oldscool Intro by Thorsten Kattanek" << endl;
+
     /// Initialisieren der GameEngine incl. Loop ///
-    ge = new GameEngine(esc_ende|resize,640,480,32,(char*)"INTRO BY THORSTEN KATTANEK ALIAS MR.EMU64 --- (C)2012",&err);
+    ge = new GameEngine(esc_ende,640,480,32,(char*)"INTRO BY THORSTEN KATTANEK ALIAS MR.EMU64 --- (C)2016   [SDL2 Version]",&err);
     if(err < 0) return 0;
 
     /// Demo Installieren ///

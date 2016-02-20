@@ -1,7 +1,7 @@
 #ifndef HCOLORSCROLL_H
 #define HCOLORSCROLL_H
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 #include <iostream>
 using namespace std;
