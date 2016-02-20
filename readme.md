@@ -14,16 +14,15 @@ MXE evoriment must installed on your system
 git clone https://tkattanek@bitbucket.org/tkattanek/oldscool_intro.git
 cd oldscool_intro
 
-nano cross_build_mxe.sh
---> Edit MXE_PATH = Set mxe path of your system
+Bsp.: with integrated script for MXE environment (cross_build.sh)
 
-./cross_build_mxe.sh
+./cross_build.sh /opt/mxe i686 static
 ```
 #Libs#
-- SDL
-- SLD_image
-- SDL_gfx
-- SDL_mixer
+- SDL2
+- SLD2_image
+- SDL2_gfx
+- SDL2_mixer
 
 #This all must in the daten directory
 - 3.xm
@@ -33,6 +32,6 @@ nano cross_build_mxe.sh
 - giana.png
 
 
-#screenshot
+#Screenshot
 
 ![screenshot](http://picload.org/image/adolalp/oldscool_intro_s.png)
