@@ -294,9 +294,19 @@ void GameEngine::RenderVideo(SDL_Surface *screen)
 void GameEngine::LoadMusik(int slotnr,const char *filename)
 {
     if(slotnr >= AUDIO_MUSIK_SLOTS) return;
-    if(musik[slotnr] != 0) Mix_FreeMusic(musik[slotnr]);
+    if(musik[slotnr] != NULL)
+    {
+        Mix_FreeMusic(musik[slotnr]);
+        musik[slotnr] = NULL;
+    }
+
 
     musik[slotnr] = Mix_LoadMUS(filename);
+    if(musik[slotnr] == NULL)
+    {
+        cout << "Fehler beim laden der Musik." << endl;
+        cout << Mix_GetError() << endl;
+    }
 }
 
 void GameEngine::PlayMusik(int slotnr)
