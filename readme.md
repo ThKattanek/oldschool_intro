@@ -1,37 +1,52 @@
-# Linux Build
-```Bash  
-git clone https://tkattanek@bitbucket.org/tkattanek/oldscool_intro.git
+# Oldscool Intro
+A oldscool intro with sdl2
+### [Latest version here](https://github.com/ThKattanek/oldscool_intro/releases)
+
+![Screenshot](screenshot.png)
+
+## Used libraries
+* SDL2
+* SLD2_image
+* SDL2_gfx
+* SDL2_mixer
+
+## Compiling and installing
+```bash
+cd ~
+git clone https://github.com/ThKattanek/oldscool_intro.git
 cd oldscool_intro
-mkdir linux_build
-cd linux_build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-make -j4
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local
+make
+make install
 ```
-
-# Compile for Windows on Limux with MXE (mxe.cc)
-MXE evoriment must installed on your system
-```Bash  
-git clone https://tkattanek@bitbucket.org/tkattanek/oldscool_intro.git
+## Compiling for Windows x32 with MXE (Crossdev)
+```bash
+cd ~
+git clone https://github.com/ThKattanek/oldscool_intro.git
 cd oldscool_intro
-
-Bsp.: with integrated script for MXE environment (cross_build.sh)
-
-./cross_build.sh /opt/mxe i686 static
+mkdir build-win-x32
+cd build-win-x32
+[MXE-PATH]/usr/bin/i686-w64-mingw32.static-cmake .. -DWIN32_STATIC_BUILD=TRUE
+make
 ```
-# Libs
-- SDL2
-- SLD2_image
-- SDL2_gfx
-- SDL2_mixer
-
-# This all must in the daten directory
-- 3.xm
-- font1.png
-- font1m.png
-- font6.png
-- giana.png
-
-
-# Screenshot
-
-![screenshot](http://picload.org/image/adolalp/oldscool_intro_s.png)
+## Compiling for Windows x64 with MXE (Crossdev)
+```bash
+cd ~
+git clone https://github.com/ThKattanek/oldscool_intro.git
+cd oldscool_intro
+mkdir build-win-x64
+cd build-win-x64
+[MXE-PATH]/usr/bin/x86_64-w64-mingw32.static-cmake .. -DWIN32_STATIC_BUILD=TRUE
+make
+```
+## Complete build and create the windows versions (32/64bit) as 7zip with Script (crossbuild_win_releases.sh)
+#### MXE required
+```bash
+cd ~
+git clone https://github.com/ThKattanek/oldscool_intro.git
+cd oldscool_intro
+./crossbuild_win_releases.sh [MXE-PATH]
+```
+### [MXE Website](http://mxe.cc)
