@@ -10,17 +10,24 @@ A oldscool intro with sdl2
 * SDL2_gfx
 * SDL2_mixer
 
-## Compiling and installing
+## Build
 ```bash
-cd ~
-git clone https://github.com/ThKattanek/oldscool_intro.git
-cd oldscool_intro
+git clone https://github.com/ThKattanek/emu64.git
+cd emu64
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local
+cmake .. -DCMAKE_BUILD_TYPE=Release
 make
 make install
 ```
+Optional kann noch -DCMAKE_INSTALL_PREFIX=[InstallPfad] verwendet werden.
+
+## Uninstall
+```bash
+xargs rm < install_manifest.txt
+```
+Warning! Directories created by the installation are not removed, but only all files created.
+
 ## Compiling for Windows x32 with MXE (Crossdev)
 ```bash
 cd ~
