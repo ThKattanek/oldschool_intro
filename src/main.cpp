@@ -64,7 +64,7 @@ void InitDemo(GameEngine *ge)
     /// Giana Animation erstellen ///
 
     ge->NewObject(&giana);
-    giana->LoadTileSet("daten/giana.png",44,92);
+    giana->LoadTileSet(DATA_PATH"giana.png",44,92);
     giana->SetAnimation(0,0,0,8);
     giana->SetAnimationSpeed(0,11);
     giana->SetAnimation(1,8,0,8);
@@ -91,12 +91,12 @@ void InitDemo(GameEngine *ge)
     hcolscroll[1]->CreateColorTab(colors1,5,64);
 
     ge->NewObject(&bmpfont0);
-    bmpfont0->LoadFont("daten/font6.png",32,30,10,5,"ABCDEFGHIJKLMNOPQRSTUVWXYZ.,\"-+!?()?:;0123456789np");
+    bmpfont0->LoadFont(DATA_PATH"font6.png",32,30,10,5,"ABCDEFGHIJKLMNOPQRSTUVWXYZ.,\"-+!?()?:;0123456789np");
 
     ge->NewObject(&bmpfont1);
     ge->NewObject(&bmpfont2);
-    bmpfont1->LoadFont("daten/font1.png",32,33,10,6," !\"    '()  ,-. 0123456789:; = ? ABCDEFGHIJKLMNOPQRSTUVWXYZ ");
-    bmpfont2->LoadFont("daten/font1m.png",32,33,10,6,"RSTUVWXYZ HIJKLMNOPQ ? YBCDEFG456789:; =  ,-. 0123 !\"   '()");
+    bmpfont1->LoadFont(DATA_PATH"font1.png",32,33,10,6," !\"    '()  ,-. 0123456789:; = ? ABCDEFGHIJKLMNOPQRSTUVWXYZ ");
+    bmpfont2->LoadFont(DATA_PATH"font1m.png",32,33,10,6,"RSTUVWXYZ HIJKLMNOPQ ? YBCDEFG456789:; =  ,-. 0123 !\"   '()");
     //bmpfont1->LoadFont("daten/font1.png","daten/font1.inf");
     //bmpfont2->LoadFont("daten/font1m.png","daten/font1m.inf");
 
@@ -112,7 +112,7 @@ void InitDemo(GameEngine *ge)
     scroller0->SetSpeed(100,600);
     scroller1->SetSpeed(100,600);
 
-    ge->LoadMusik(0,"daten/3.xm");
+    ge->LoadMusik(0,DATA_PATH"3.xm");
     ge->PlayMusik(0);
 }
 
