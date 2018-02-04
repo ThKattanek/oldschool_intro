@@ -205,6 +205,9 @@ if(WIN32)
     install(FILES "data/font6.png" DESTINATION ./data)
     install(FILES "data/giana.png" DESTINATION ./data)
 
+    # Sonstiges
+    install(FILES "LICENSE" DESTINATION ./)
+
 else()
     ################## Linux #################
     # Install Binary
@@ -216,4 +219,11 @@ else()
     install(FILES "data/font1m.png" DESTINATION share/${PROJECT_NAME}/data)
     install(FILES "data/font6.png" DESTINATION share/${PROJECT_NAME}/data)
     install(FILES "data/giana.png" DESTINATION share/${PROJECT_NAME}/data)
+
+    # Install Startmenü Eintrag
+    install(FILES "src/${PROJECT_NAME}.desktop" DESTINATION share/applications)
+    install(FILES "data/${PROJECT_NAME}.png" DESTINATION share/icons/hicolor/64x64/apps)
+
+    # Sonstiges
+    install(FILES "LICENSE" DESTINATION share/${PROJECT_NAME})
 endif()
