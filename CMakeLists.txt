@@ -116,7 +116,6 @@ if (UNIX)
     find_package(X11 REQUIRED)
     if(X11_FOUND)
         include_directories(${X11_INCLUDE_DIR})
-        set(LIBRARIES ${LIBRARIES} ${X11_LIBRARIES})
     else()
         message(FATAL_ERROR "X11 wurde nicht gefunden!")
     endif()
@@ -126,7 +125,6 @@ endif()
 find_package(SDL2 REQUIRED)
 if(SDL2_FOUND)
     include_directories(${SDL2_INCLUDE_DIR})
-    set(LIBRARIES ${LIBRARIES} ${SDL2_LIBRARY})
 else()
     message(FATAL_ERROR "SDL2 wurde nicht gefunden!")
 endif()
@@ -135,7 +133,6 @@ endif()
 find_package(SDL2_image REQUIRED)
 if(SDL2_IMAGE_FOUND)
     include_directories(${SDL2_IMAGE_INCLUDE_DIR})
-    set(LIBRARIES ${LIBRARIES} ${SDL2_IMAGE_LIBRARY})
 else()
     message(FATAL_ERROR "SDL2_IMAGE wurde nicht gefunden.")
 endif()
@@ -144,7 +141,6 @@ endif()
 find_package(SDL2_gfx REQUIRED)
 if(SDL2_GFX_FOUND)
     include_directories(${SDL2_GFX_INCLUDE_DIR})
-    set(LIBRARIES ${LIBRARIES} ${SDL2_GFX_LIBRARY})
 else()
     message(FATAL_ERROR "SDL2_GFX wurde nicht gefunden.")
 endif()
@@ -153,23 +149,8 @@ endif()
 find_package(SDL2_mixer REQUIRED)
 if(SDL2_MIXER_FOUND)
     include_directories(${SDL2_MIXER_INCLUDE_DIR})
-    set(LIBRARIES ${LIBRARIES} ${SDL2_MIXER_LIBRARY})
 else()
     message(FATAL_ERROR "SDL2_MIXER wurde nicht gefunden.")
-endif()
-
-# Für Windows
-if(WIN32)
-    #set(LIBRARIES ${LIBRARIES} -mwindows)  # Damit kein Konsolenfenster geöffnet wird
-    if(WIN32_STATIC_BUILD)
-        set(LIBRARIES ${LIBRARIES}
-            avcodec avformat swresample swscale avutil quazip
-            secur32 version  bluray bz2 freetype harfbuzz
-            glib-2.0 iconv intl jpeg mp3lame ogg
-            opencore-amrnb opencore-amrwb opus pcre samplerate
-            speex theoradec theoraenc tiff vo-amrwbenc vorbis vorbisenc
-            webp x264 xvidcore z vpx xml2)
-    endif()
 endif()
 
 ################### EXECUTABLE ####################
@@ -180,8 +161,22 @@ else()
     add_executable(${PROJECT_NAME} ${SOURCES})
 endif()
 
-target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${SDL2_IMAGE_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${SDL2_GFX_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${SDL2_MIXER_LIBRARY})
 
+if(WIN32)
+    set(LIBRARIES ${LIBRARIES} -mwindows)  # Damit kein Konsolenfenster geöffnet wird
+    if(WIN32_STATIC_BUILD)
+        target_link_libraries(${PROJECT_NAME} -lmingw32 -lSDL2main -lSDL2)
+        #target_link_libraries(${PROJECT_NAME} -limm32 -lversion -lwinmm -lsamplerate -ljpeg -lpng -lwebp -lmpg123 -logg -lvorbis -lvorbisfile)
+        target_link_libraries(${PROJECT_NAME} imm32 version winmm png mpg123 vorbisfile secur32 version  bluray bz2 freetype harfbuzz glib-2.0 iconv intl jpeg mp3lame ogg opencore-amrnb opencore-amrwb opus pcre samplerate speex theoradec theoraenc tiff vo-amrwbenc vorbis vorbisenc webp x264 xvidcore z vpx xml2)
+    else()
+        target_link_libraries(${PROJECT_NAME} -lmingw32 -lSDL2main -lSDL2)
+    endif()
+endif()
+    
 ################### INSTALL #######################
 
 # Set DataPath
