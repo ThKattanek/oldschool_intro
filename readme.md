@@ -12,7 +12,7 @@ A oldscool intro with sdl2
 
 ## Build
 ```bash
-git clone https://github.com/ThKattanek/emu64.git
+git clone https://github.com/ThKattanek/oldscool_intro.git
 cd emu64
 mkdir build
 cd build
