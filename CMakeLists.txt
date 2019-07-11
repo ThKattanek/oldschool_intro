@@ -11,7 +11,7 @@ cmake_minimum_required(VERSION 2.8)
 
 ##################### PROJEKT #####################
 
-project("oldscool_intro")
+project("oldschool_intro")
 message(STATUS "Project Name: " ${PROJECT_NAME})
 
 ################## CONFIGURATION ##################

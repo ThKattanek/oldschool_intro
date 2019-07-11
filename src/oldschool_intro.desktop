@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Oldschool Intro
+Comment=A oldschool intro with sdl2
+Comment[de]=Ein Oldschool Intro
+Icon=oldschool_intro
+TryExec=oldschool_intro
+Exec=oldschool_intro %f
+MimeType=application/x-geogebra-file;application/x-geogebra-tool;
+Categories=AudioVideo;
