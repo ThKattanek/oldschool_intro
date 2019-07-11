@@ -1,5 +1,5 @@
-# Oldscool Intro
-A oldscool intro with sdl2
+# Oldschool Intro
+A oldschool intro with sdl2
 ### [Latest version here](https://github.com/ThKattanek/oldscool_intro/releases)
 
 ![Screenshot](screenshot.png)
@@ -12,7 +12,7 @@ A oldscool intro with sdl2
 
 ## Build
 ```bash
-git clone https://github.com/ThKattanek/oldscool_intro.git
+git clone https://github.com/ThKattanek/oldschool_intro.git
 cd emu64
 mkdir build
 cd build
@@ -31,7 +31,7 @@ Warning! Directories created by the installation are not removed, but only all f
 ## Compiling for Windows x32 with MXE (Crossdev)
 ```bash
 cd ~
-git clone https://github.com/ThKattanek/oldscool_intro.git
+git clone https://github.com/ThKattanek/oldschool_intro.git
 cd oldscool_intro
 mkdir build-win-x32
 cd build-win-x32
@@ -42,7 +42,7 @@ make install
 ## Compiling for Windows x64 with MXE (Crossdev)
 ```bash
 cd ~
-git clone https://github.com/ThKattanek/oldscool_intro.git
+git clone https://github.com/ThKattanek/oldschool_intro.git
 cd oldscool_intro
 mkdir build-win-x64
 cd build-win-x64
@@ -54,7 +54,7 @@ make install
 #### MXE required
 ```bash
 cd ~
-git clone https://github.com/ThKattanek/oldscool_intro.git
+git clone https://github.com/ThKattanek/oldschool_intro.git
 cd oldscool_intro
 ./crossbuild_win_releases.sh [MXE-PATH]
 ```
