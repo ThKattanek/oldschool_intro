@@ -13,7 +13,7 @@ A oldschool intro with sdl2
 ## Build
 ```bash
 git clone https://github.com/ThKattanek/oldschool_intro.git
-cd emu64
+cd oldschool_intro
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
